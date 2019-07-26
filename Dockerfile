@@ -1,10 +1,13 @@
 FROM gliderlabs/alpine
 ADD package.json /srv/app/
 WORKDIR /srv/app
-RUN apk-install nodejs \
-    && npm install -g npm \
-    && npm install
+
+RUN apk-install nodejs yarn \
+    && yarn install \
+    && addgroup app \
+    && adduser -D -G app app
 
 ADD . /srv/app
 EXPOSE 3000
-CMD ["npm", "start"]
+USER app
+CMD ["yarn", "start"]
