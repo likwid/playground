@@ -1,5 +1,7 @@
 FROM gliderlabs/alpine
 ADD package.json /srv/app/
+ADD yarn.lock /srv/app
+ADD .yarnrc /srv/app
 WORKDIR /srv/app
 
 RUN apk-install nodejs yarn \
