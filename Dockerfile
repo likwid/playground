@@ -1,11 +1,10 @@
 FROM gliderlabs/alpine
 ADD package.json /srv/app/
-ADD yarn.lock /srv/app
-ADD .yarnrc /srv/app
+ADD package-lock.json /srv/app
 WORKDIR /srv/app
 
-RUN apk-install nodejs yarn \
-    && yarn install \
+RUN apk-install nodejs \
+    && npm install \
     && addgroup app \
     && adduser -D -G app app
 
